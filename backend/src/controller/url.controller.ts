@@ -87,7 +87,6 @@ export const deleteAllUrls = async (req: Request, res: Response) => {
     try {
         // const oneDayAgo = new Date(new Date().getTime() - 86400000);
         const result = await Url.deleteMany();
-        console.log(`URLs expiradas apagadas:}`);
         res.status(200).json({ message: `All URLs were successfully deleted. ${result.deletedCount}`});
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error" });
