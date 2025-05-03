@@ -18,7 +18,7 @@ document.getElementById("urlForm").addEventListener("submit", async (event) => {
 
     if (!originalUrl) {
         errorDiv.style.display = "block";
-        errorDiv.querySelector("p").textContent = "Por favor, insira uma URL válida!";
+        errorDiv.querySelector("p").textContent = "Please enter a valid URL!";
         return;
     }
 
@@ -36,17 +36,17 @@ document.getElementById("urlForm").addEventListener("submit", async (event) => {
         if (response.ok) {
             shortUrlText.textContent = `${apiUrl}/${data.shortUrl}`;
 
-            showToast("success", "A URL foi encurtada com sucesso!");
+            showToast("success", "The URL has been successfully shortened!\n");
             loadShortUrls();
         } else {
             errorDiv.style.display = "block";
-            errorDiv.querySelector("p").textContent = data.error || "Erro ao encurtar a URL!";
-            showToast("error", data.error || "Erro ao encurtar a URL!");
+            errorDiv.querySelector("p").textContent = data.error || "Error shortening URL!";
+            showToast("error", data.error || "Error shortening URL!");
         }
     } catch (error) {
         errorDiv.style.display = "block";
-        errorDiv.querySelector("p").textContent = "Erro ao se comunicar com o servidor!";
-        showToast("error", "Erro ao se comunicar com o servidor!");
+        errorDiv.querySelector("p").textContent = "Error communicating with the server!";
+        showToast("error", "Error communicating with the server!");
     }
 });
 
@@ -100,7 +100,7 @@ async function loadShortUrls(page = 1) {
             const totalPages = data.totalPages || 1;
 
             if (!data.urls || data.urls.length === 0) {
-                shortUrlsList.innerHTML = "<li>Nenhuma URL encontrada.</li>";
+                shortUrlsList.innerHTML = "<li>Not Found.</li>";
                 deleteAllBtn.hidden = true;
                 generatePaginationControls(currentPage, totalPages);
                 return;
@@ -118,7 +118,7 @@ async function loadShortUrls(page = 1) {
                 deleteUrl.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
 
                 deleteUrl.addEventListener("click", () => {
-                    if (confirm("Tem certeza que deseja deletar esta URL?")) {
+                    if (confirm("Are you sure you want to delete all these URLs?")) {
                         deleteShortUrl(url.shortUrl);
                     }
                 });
@@ -133,11 +133,11 @@ async function loadShortUrls(page = 1) {
             }
             generatePaginationControls(currentPage, totalPages);
         } else {
-            shortUrlsList.innerHTML = "<li>Erro ao carregar URLs encurtadas.</li>";
+            shortUrlsList.innerHTML = "<li>Error loading shortened URLs.</li>";
             deleteAllBtn.hidden = true;
         }
     } catch (error) {
-        shortUrlsList.innerHTML = "<li>Erro ao se comunicar com o servidor!</li>";
+        shortUrlsList.innerHTML = "<li>Error communicating with the server!</li>";
         deleteAllBtn.hidden = true;
     }
 }

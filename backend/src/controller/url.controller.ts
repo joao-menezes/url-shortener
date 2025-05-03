@@ -24,7 +24,7 @@ export const getAllUrls = async (req: Request, res: Response) => {
             urls
         });
     } catch (e) {
-        res.status(500).send("Erro ao recuperar URLs.");
+        res.status(500).send("Error retrieving URLs.");
     }
 };
 
@@ -34,7 +34,7 @@ export const createShortUrl = async (req: Request, res: Response) => {
         const { originalUrl } = req.body;
 
         if (!originalUrl) {
-            res.status(400).json({ error: "URL original é obrigatória" });
+            res.status(400).json({ error: "Original URL is mandatory" });
             return
         }
 
@@ -44,7 +44,7 @@ export const createShortUrl = async (req: Request, res: Response) => {
         await newUrl.save();
         res.status(201).json({ originalUrl, shortUrl });
     } catch (error) {
-        res.status(500).json({ error: "Erro ao criar URL encurtada" });
+        res.status(500).json({ error: "Error creating shortened URL" });
     }
 };
 
@@ -54,13 +54,13 @@ export const redirectToOriginalUrl = async (req: Request, res: Response) => {
     try {
         const url = await Url.findOne({ shortUrl });
         if (!url) {
-            res.status(404).json({ error: "URL não encontrada" });
+            res.status(404).json({ error: "URL not found" });
         } else {
             res.redirect(url.originalUrl);
             return
         }
     } catch (error) {
-        res.status(500).json({ error: "Erro ao buscar URL" });
+        res.status(500).json({ error: "URL search error" });
     }
 };
 
@@ -88,8 +88,8 @@ export const deleteAllUrls = async (req: Request, res: Response) => {
         // const oneDayAgo = new Date(new Date().getTime() - 86400000);
         const result = await Url.deleteMany();
         console.log(`URLs expiradas apagadas:}`);
-        res.status(200).json({ message: `Todas as URLs foram deletadas com sucesso. ${result.deletedCount}`});
+        res.status(200).json({ message: `All URLs were successfully deleted. ${result.deletedCount}`});
     } catch (error) {
-        res.status(500).json({ message: "Erro interno ao deletar as URLs." });
+        res.status(500).json({ message: "Internal Server Error" });
     }
 };
