@@ -57,13 +57,13 @@ async function deleteShortUrl(shortUrl) {
         });
 
         if (response.ok) {
-            showToast("success", "URL deletada com sucesso!");
+            showToast("success", "URL successfully deleted!");
             await loadShortUrls();
         } else {
-            showToast("error", "Erro ao deletar URL.");
+            showToast("error", "Error deleting URL.");
         }
     } catch (error) {
-        showToast("error", "Erro ao tentar deletar a URL.");
+        showToast("error", "Error when trying to delete the URL.");
     }
 }
 
