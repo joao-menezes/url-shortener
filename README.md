@@ -152,7 +152,7 @@ Shortens a given URL.
 
 ```json
 {
-  "originalUrl": "https://www.example.com/some/very/long/url"
+  "originalUrl": "mongodb+srv://<username>:<passowrd>@<project-name>.xsmmd.mongodb.net/"
 }
 ```
 
