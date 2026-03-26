@@ -106,11 +106,10 @@ cd backend
 npm install
 ```
 
-3. Install frontend dependencies:
+3. frontend dependencies:
 
 ```bash
-cd ../frontend
-npm install
+none
 ```
 
 ### Environment Variables
@@ -136,7 +135,7 @@ npm run dev
 
 ```bash
 cd frontend
-npm run dev
+just run the html file
 ```
 
 The API will be available at `http://localhost:3000` and the frontend at `http://localhost:5173` (or whichever port Vite assigns).
